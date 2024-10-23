@@ -5,9 +5,18 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #524948;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+/* Example for headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #E0E0E0;
+}
+
+p {
+  color: #E0E0E0;
 }

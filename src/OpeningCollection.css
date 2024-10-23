@@ -1,0 +1,12 @@
+.openingCollection{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3rem;
+    border: 3px solid red;
+}
+
+.openingItem{
+    border: 2px solid grey;
+    margin: 2rem;
+    padding: 2rem;
+}
