@@ -1,9 +1,12 @@
 import './ChessBoard.css';
 import Pawn from './Pieces';
+import React, { useEffect, useState } from "react";
 import BoardCell from './BoardCell';
 
 function Chessboard() {
-  var chessBoard = [
+
+  var activePiece = [[]];
+  const [chessBoard, setBoard] = useState([
     // ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
     // ['bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp'],
     // ['-', '-', '-', '-', '-', '-', '-', '-'],
@@ -34,22 +37,33 @@ function Chessboard() {
     new Pawn([6,6]),
     new Pawn([6,7])],
     ['','','','','','','','']
-  ]
+  ]);
 
+  const changeBoard = (positionY, positionX) => {
+    console.log(positionX, positionY);
+    var newBoard = chessBoard.map(arr => arr.slice()); // Create a deep copy of the board
+    console.log(newBoard);
+
+    newBoard[positionY][positionX] = new Pawn(positionY, positionX);
+    
+    setBoard(newBoard);
+  }
 
   return (
     <div className='chessboard'>
       {chessBoard.map((boardRow, rowIndex) => (
         <div className="boardrow" key={rowIndex}>
             {boardRow.map((cell, cellIndex) => (
-                <div className="cell" key={cellIndex}>
+              <BoardCell 
+                  color={(cellIndex+rowIndex) % 2 === 0 ? 'white' : 'grey'}
+                  lightUp={false}
+                  piece={cell instanceof Pawn ? cell.getPieceImg() : ''}
+                  positionX={cellIndex}
+                  positionY={rowIndex}
+                  handleMovePiece={changeBoard}
+                  
+                  />
                 
-                <BoardCell 
-                    color={cellIndex % 2 === 0 ? 'white' : 'grey'}
-                    lightUp={false}
-                    piece={cell instanceof Pawn ? cell.getPieceImg() : ''}
-                    />
-                </div>
             ))}
         </div>
       ))}
