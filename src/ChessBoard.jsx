@@ -6,8 +6,8 @@ import BoardCell from './BoardCell';
 function Chessboard() {
 
   var somePieceActive = false;
+  const [activePieceIndexes, setActivePieceIndexes] = useState([]);
   const [activeSquares, setActiveSquares] = useState([[]]);
-
 
   const [chessBoard, setBoard] = useState([
     // ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
@@ -42,12 +42,17 @@ function Chessboard() {
     ['','','','','','','','']
   ]);
 
-  const changeBoard = (positionY, positionX) => {
-    console.log(positionX, positionY);
-    var newBoard = chessBoard.map(arr => arr.slice()); // Create a deep copy of the board
-    console.log(newBoard);
 
-    newBoard[positionY][positionX] = new Pawn(positionY, positionX);
+  const arraysEqual = (a, b) => a.length === b.length && a.every((value, index) => value === b[index]);
+
+
+
+  const movePiece = (startPos, endPos) => {
+    var newBoard = chessBoard.map(arr => arr.slice()); // Create a deep copy of the board
+
+    newBoard[endPos[0]][endPos[1]] = newBoard[startPos[0]][startPos[1]];
+    newBoard[startPos[0]][startPos[1]] = '';
+    newBoard[endPos[0]][endPos[1]].updatePosition(endPos);
     
     setBoard(newBoard);
   }
@@ -56,22 +61,41 @@ function Chessboard() {
     setBoard(chessBoard.map(arr => arr.slice()));
   }
 
+  const resetActiveSquares = () => {
+    setActivePieceIndexes([]);
+    setActiveSquares([]);    
+  }
+
+  const handleMovementLogic = (piece, positionY, positionX) => {
+    if(!arraysEqual(activeSquares, [])) {
+      if(activeSquares.some(([r, c]) => r === positionY && c === positionX)) {
+        movePiece(activePieceIndexes, [positionY, positionX]);
+        resetActiveSquares();
+      }
+    }
+
+    showAvailableMoves(piece, positionY, positionX);
+  }
+
   const showAvailableMoves = (piece, positionY, positionX) =>{
+
+
+    var clickPosition = [positionY, positionX];
+    if(arraysEqual(clickPosition, activePieceIndexes)) {
+      setActivePieceIndexes([]);
+      setActiveSquares([[]]);
+      return;
+    }
+
     if(piece instanceof Pawn) {
       var positions = piece.getValidPosition(chessBoard);
-      console.log("positions new: ", positions)
+      console.log("positions new: ", positions);
       setActiveSquares(positions);
     }else {
       console.log("not a piece?");
     }
-    // if(activeSquares != []) {
-    //   somePieceActive = true;
-    // }
-
-    // var newBoard = chessBoard.map(arr => arr.slice()); // Create a deep copy of the board
-    // newBoard[positionY][positionX] = new Pawn(positionY, positionX);
+    setActivePieceIndexes([positionY, positionX]);
     
-
   }
 
   return (
@@ -85,8 +109,8 @@ function Chessboard() {
                   piece={cell}
                   positionX={cellIndex}
                   positionY={rowIndex}
-                  handleMovePiece={changeBoard}
-                  handleClickPiece={showAvailableMoves}
+                  // handleMovePiece={activeSquares.some(([r, c]) => r === rowIndex && c === cellIndex) ? changeBoard : ''}
+                  handleClickPiece={handleMovementLogic}
                   
                   />
                 

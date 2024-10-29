@@ -20,8 +20,8 @@ class Pawn {
     }
 
     updatePosition(newPosition){
-        if(newPosition[0] !== this.position[0]){
-            this.position[0] = newPosition[0];
+        if(newPosition[0] !== this.position[0] || newPosition[1] !== this.position[1]){
+            this.position = newPosition;
             this.hasMoved = true;
         }
     }
