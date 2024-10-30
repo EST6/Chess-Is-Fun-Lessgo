@@ -22,14 +22,12 @@ class Piece {
         2 : can not move, your own piece in the way
     */
     checkPiece(boardState, position, myColor){
-        if(boardState[position[0]][position[1]] instanceof Piece){
-            if(boardState[position[0]][position[1]].getColor !== myColor){
-                return 1
-            }else{
-                return 2;
-            }
-        }
-        return 0;
+        var piece = boardState[position[0]][position[1]]
+        if(!(piece instanceof Piece)) return 0;
+        
+        if(piece.getColor() !== myColor) return 1
+    
+        return 2;        
     }
 }
 
