@@ -1,8 +1,9 @@
-class Pawn {
+import Piece from "./Piece";
+
+class Pawn extends Piece {
     constructor(position, color) {
-        this.position = position;
+        super(position, color)
         this.hasMoved = false;
-        this.color = color;
     }
 
 
@@ -19,6 +20,7 @@ class Pawn {
         return [[this.position[0] + (1*times), this.position[1]]];
     }
 
+    // TODO remove this, call Move() from parent
     updatePosition(newPosition){
         if(newPosition[0] !== this.position[0] || newPosition[1] !== this.position[1]){
             this.position = newPosition;
@@ -34,30 +36,5 @@ class Pawn {
     // en passant?
     // take a piece, move diag
 }
-/*
-class Knight {
-    constructor(position) {
-        this.position = position;
-    }
-
-    getValidPosition(boardState) {
-        return [this.position];
-    }
-
-    updatePosition(newPosition){
-        if(newPosition != this.position){
-            this.position = newPosition;
-            this.hasMoved = true;
-        }
-    }
-
-    getPieceImg() {
-        return "pawn";
-    }
-
-    // Queen a pawn?
-    // en passant?
-    // take a piece, move diag
-}*/
 
 export default Pawn;
