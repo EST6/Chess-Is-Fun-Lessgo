@@ -59,7 +59,7 @@ function Chessboard() {
 
     newBoard[endPos[0]][endPos[1]] = newBoard[startPos[0]][startPos[1]];
     newBoard[startPos[0]][startPos[1]] = '';
-    newBoard[endPos[0]][endPos[1]].updatePosition(endPos);
+    newBoard[endPos[0]][endPos[1]].move(endPos);
     
     setBoard(newBoard);
   }

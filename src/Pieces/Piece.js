@@ -6,9 +6,8 @@ class Piece {
     }
 
     move(newPosition){
-        if(newPosition[0] !== this.position[0]){
-            this.position[0] = newPosition[0];
-            this.hasMoved = true;
+        if(newPosition!== this.position){
+            this.position = newPosition;
         }
     }
 
