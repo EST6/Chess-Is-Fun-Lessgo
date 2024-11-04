@@ -12,27 +12,28 @@ class Pawn extends Piece {
         }
 
         var takeMove = [this.position[0]+(1*times), this.position[1]+(1*times)]
-        if([0,1].includes(super.checkPiece(boardState, takeMove, this.color))) {
+        if(1===super.checkPiece(boardState, takeMove, this.color)) {
             a.push(takeMove);
         }
         
         takeMove = [this.position[0]+(1*times), this.position[1]+(-1*times)]
-        if([0,1].includes(super.checkPiece(boardState, takeMove, this.color))) {
+        if(1===super.checkPiece(boardState, takeMove, this.color)) {
             a.push(takeMove);
         }
 
         takeMove = [this.position[0] + (1*times), this.position[1]]
 
-        if([0,1].includes(super.checkPiece(boardState, takeMove, this.color))) {
+        if(0===super.checkPiece(boardState, takeMove, this.color)) {
             a.push(takeMove);
         }
         
         if((this.position[0] === 6 && this.color === "white") || (this.position[0] === 1 && this.color === "black")) {
+            takeMove =[this.position[0] + (2 * times), this.position[1]]
 
-            a.push([[this.position[0] + (2 * times), this.position[1]],[this.position[0]+(1*times), this.position[1]]])
+            if(0===super.checkPiece(boardState, takeMove, this.color)) {
+                a.push(takeMove);
+            }
         } 
-
-        return [];
 
         return a;
     }
@@ -43,7 +44,6 @@ class Pawn extends Piece {
 
     // Queen a pawn?
     // en passant?
-    // take a piece, move diag
 }
 
 export default Pawn;

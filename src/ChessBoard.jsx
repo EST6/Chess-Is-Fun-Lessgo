@@ -14,6 +14,7 @@ function Chessboard() {
   var somePieceActive = false;
   const [activePieceIndexes, setActivePieceIndexes] = useState([]);
   const [activeSquares, setActiveSquares] = useState([[]]);
+  const [activeColor, setActiveColor] = useState("white")
 
   const [chessBoard, setBoard] = useState([
     // ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
@@ -73,12 +74,23 @@ function Chessboard() {
     setActiveSquares([]);    
   }
 
-  const handleMovementLogic = (piece, positionY, positionX) => {
+  const handleMovementLogic = (piece, positionY, positionX, color) => {
+
     if(!arraysEqual(activeSquares, [])) {
       if(activeSquares.some(([r, c]) => r === positionY && c === positionX)) {
         movePiece(activePieceIndexes, [positionY, positionX]);
+        if(activeColor==="white"){
+          setActiveColor("black");
+        }else{
+          setActiveColor("white");
+        }
         resetActiveSquares();
+        return;
       }
+    }
+
+    if(color !== activeColor){
+      return;
     }
 
     showAvailableMoves(piece, positionY, positionX);
