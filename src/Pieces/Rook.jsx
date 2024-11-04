@@ -61,7 +61,7 @@ class Rook extends Piece {
     }
 
     getPieceImg() {
-        return (this.color === "white" ? "wRook.png" : "bRook.png");
+        return (this.color === "white" ? "wr.svg" : "br.svg");
     }
 }
 

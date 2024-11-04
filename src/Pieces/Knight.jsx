@@ -21,7 +21,7 @@ class Knight extends Piece {
     }
 
     getPieceImg() {
-        return (this.color === "white" ? "wKnight.png" : "bKnight.png");
+        return (this.color === "white" ? "wn.svg" : "bn.svg");
     }
 }
 

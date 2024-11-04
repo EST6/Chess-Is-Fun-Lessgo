@@ -39,7 +39,7 @@ class Pawn extends Piece {
     }
 
     getPieceImg() {
-        return (this.color === "white" ? "wPawn.png" : "bPawn.png");
+        return (this.color === "white" ? "wp.svg" : "bp.svg");
     }
 
     // Queen a pawn?

@@ -6,4 +6,15 @@
 .boardCell{
     height: 40px;
     width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circleHighlight {
+    width: 10px;
+    height: 10px;
+    background-color: #ffad05;
+    border-radius: 50%;
+    position: absolute;
 }

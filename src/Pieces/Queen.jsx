@@ -104,7 +104,7 @@ class Queen extends Piece {
     }
 
     getPieceImg() {
-        return (this.color === "white" ? "wQueen.png" : "bQueen.png");
+        return (this.color === "white" ? "wq.svg" : "bq.svg");
     }
 }
 

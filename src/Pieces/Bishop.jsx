@@ -77,7 +77,7 @@ class Bishop extends Piece {
     }
 
     getPieceImg() {
-        return (this.color === "white" ? "wBishop.png" : "bBishop.png");
+        return (this.color === "white" ? "wb.svg" : "bb.svg");
     }
 }
 
